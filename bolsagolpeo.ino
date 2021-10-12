@@ -8,6 +8,10 @@
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 #define DELAYVAL 500
 
+byte rojo=0;
+byte verde=0;
+byte azul=0;
+const byte PAUSA=0;
 int nump=0;
 int golpe=0;
 //int senaalto=1023;
@@ -19,9 +23,11 @@ void setup() {
 #endif
   Serial.begin (115200);
   pixels.begin();
+  pixels.show();
 }
 
 void loop() {
+   pixels.setBrightness(10);
 //-------------------------------------------------------------lectura de golpe 
   golpe=analogRead(A0);//Leo analogo
   Serial.println(golpe);//imprimo analogo
@@ -30,20 +36,94 @@ void loop() {
   Serial.print('\t');
 //----------------------------------------------------------------------------------------
 //-------------------------------------------------------------luces  
-  pixels.clear();
+ pixels.clear();
 
-//  switch (nump)
-//    if (nump<=3){
-//
-//    if ((nump>=3)&&(nump<=5)){
-//
-//    if  ((nump>=5)&&(nump<=8)){
-
-  for(int i=0; i<nump; i++) {//NUMPIXELS
-    pixels.setPixelColor(i, pixels.Color(i, 10, 10));//rojo,verde,azul 0-255
+  switch (nump){
+    case 0:
+    pixels.setPixelColor(0, 0, 255, 0);//rojo,verde,azul 0-255
     pixels.show();
+    delay(PAUSA);
+    break;
+    
+    case 1:
+    pixels.setPixelColor(0, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(1, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.show();
+    delay(PAUSA);
+    break;
 
+    case 2:
+    pixels.setPixelColor(0, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(1, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(2, 128, 255, 0);//rojo,verde,azul 0-255
+    pixels.show();
+    delay(PAUSA);
+    break;
+
+    case 3:
+    pixels.setPixelColor(0, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(1, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(2, 128, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(3, 190, 255, 0);//rojo,verde,azul 0-255
+    pixels.show();
+    delay(PAUSA);
+    break;
+    
+    case 4:
+    pixels.setPixelColor(0, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(1, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(2, 128, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(3, 190, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(4, 255, 255, 0);//rojo,verde,azul 0-255
+    pixels.show();
+    delay(PAUSA);
+    break;
+    
+    case 5:
+    pixels.setPixelColor(0, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(1, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(2, 128, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(3, 190, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(4, 255, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(5, 255, 128, 0);//rojo,verde,azul 0-255
+    pixels.show();
+    delay(PAUSA);
+    break;
+    
+    case 6:
+    pixels.setPixelColor(0, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(1, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(2, 128, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(3, 190, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(4, 255, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(5, 255, 128, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(6, 255, 0, 0);//rojo,verde,azul 0-255
+    pixels.show();
+    delay(PAUSA);
+    break;
+    
+    case 7:
+    pixels.setPixelColor(0, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(1, 0, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(2, 128, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(3, 190, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(4, 255, 255, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(5, 255, 128, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(6, 255, 0, 0);//rojo,verde,azul 0-255
+    pixels.setPixelColor(7, 255, 0, 0);//rojo,verde,azul 0-255
+    pixels.show();
+    delay(PAUSA);
+    break;
+           
     }
+    
+
+
+//  for(int i=0; i<nump; i++) {//NUMPIXELS
+//    pixels.setPixelColor(i, pixels.Color(i, 10, 10));//rojo,verde,azul 0-255
+//    pixels.show();
+//
+//    }
 }
 
 //----------------------------------------------------------------
