@@ -12,8 +12,9 @@ byte rojo=0;
 byte verde=0;
 byte azul=0;
 const byte PAUSA=0;
-int nump=0;
+byte nump=0;
 int golpe=0;
+float furk=0;                                             //Fuerza en Kilogramos byte porque es menor a 255
 
 void setup() {
 #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
@@ -27,12 +28,16 @@ void setup() {
 void loop() {
    pixels.setBrightness(10);
 //-------------------------------------------------------------lectura de golpe 
-  golpe=analogRead(A0);//Leo analogo
-  Serial.println(golpe);//imprimo analogo
-  nump=map(golpe, 0, 1023, 0, 8);
-  Serial.print(nump);//imprimo analogo
+  golpe=analogRead(A0);                                    //Leo analogo
+  Serial.println(golpe);                                   //imprimo analogo
+  nump=map(golpe, 0, 61, 0, 8);                  //nump es para el nivel fuerza visualizado en barra 61FCRcirc 1023FCRcuadra
+  furk=map(golpe, 0, 61, 0, 9.97903);
+  Serial.print(nump);                                      //imprimo analogo
   Serial.print('\t');
-//----------------------------------------------------------------------------------------
+  Serial.print(furk);
+  Serial.print(" Kg");                               
+  Serial.print('\t');
+//------------------------------------------------------------
 //-------------------------------------------------------------luces  
   pixels.clear();
   for(int i=0; i<nump; i++) {
