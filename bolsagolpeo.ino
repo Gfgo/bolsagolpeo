@@ -31,10 +31,10 @@ void loop() {
   golpe=analogRead(A0);                                    //Leo analogo
   Serial.println(golpe);                                   //imprimo analogo
   nump=map(golpe, 0, 61, 0, 8);                  //nump es para el nivel fuerza visualizado en barra 61FCRcirc 1023FCRcuadra
-  furk=map(golpe, 0, 61, 0, 9.97903);
+  furk=map(golpe, 0, 61, 0, 9.98);
   Serial.print(nump);                                      //imprimo analogo
   Serial.print('\t');
-  Serial.print(furk);
+  Serial.print(furk, 2);
   Serial.print(" Kg");                               
   Serial.print('\t');
 //------------------------------------------------------------
