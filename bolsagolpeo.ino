@@ -12,10 +12,13 @@ byte rojo=0;
 byte verde=0;
 byte azul=0;
 const byte PAUSA=0;
+
 byte nump=0;
 byte nump2=0;
-int golpe=0;
+
+int golpe=0;                                              //Lectura de golpe
 int golpe2=0;
+
 float furk=0;                                             //Fuerza en Kilogramos byte porque es menor a 255
 //float furk2=0;
 
