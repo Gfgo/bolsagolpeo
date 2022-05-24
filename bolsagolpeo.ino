@@ -201,6 +201,9 @@ float       furk3=0;
 float       furk4=0;
 float       furk5=0;
 
+unsigned long previousMillis = 0;
+const long interval = 300;
+
 void setup() {
   #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
   clock_prescale_set(clock_div_1);
@@ -213,7 +216,8 @@ void setup() {
 }
 
 void loop() {
-
+  unsigned long currentMillis = millis();
+  
 //nump es para el nivel fuerza visualizado en barra 61FCRcirc 1023FCRcuadra
 //nump numero de pixeles sensor de 0-(61 o 1023) y los pixeles van 0-8
 //furk fuerza en kilogramos de 0-(61 o 1023) y de 0 al limite superior
@@ -226,9 +230,12 @@ void loop() {
   golpe4= analogRead(pin4);
   golpe5= analogRead(pin5);
 
-  Serial.print(golpe0); Serial.print('\t'); Serial.print(golpe1); Serial.print('\t'); Serial.print(golpe2); Serial.print('\t');
-  Serial.print(golpe3); Serial.print('\t'); Serial.print(golpe4); Serial.print('\t'); Serial.println(golpe5);
-  delay(10);
+if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+    Serial.print(golpe0); Serial.print(nump0);Serial.print('\t'); Serial.print(golpe1); Serial.print(nump1); Serial.print('\t');
+    Serial.print(golpe2); Serial.print(nump2);Serial.print('\t'); Serial.print(golpe3); Serial.print(nump3);Serial.print('\t'); 
+    Serial.print(golpe4); Serial.print(nump4);Serial.print('\t'); Serial.print(golpe5);Serial.print(nump5); Serial.print('\n');
+}//delay(10);
 
   if(golpe0>=600){
     nump0=map(golpe0, 600, 4095, 0, 8);                
@@ -244,9 +251,24 @@ void loop() {
     nump2=map(golpe2, 600, 4095, 0, 8);                
     furk2=map(golpe2, 600, 4095, 0, 20);               
     }
+
+    if(golpe3>=600){
+    nump3=map(golpe3, 600, 4095, 0, 8);                
+    furk3=map(golpe3, 600, 4095, 0, 20);               
+    }                                                  
+
+    if(golpe4>=600){
+    nump4=map(golpe4, 600, 4095, 0, 8);                
+    furk4=map(golpe4, 600, 4095, 0, 20);               
+    }
+
+    if(golpe5>=600){
+    nump5=map(golpe5, 600, 4095, 0, 8);                
+    furk5=map(golpe5, 600, 4095, 0, 20);               
+    }
   
   strip.clear();
-  for(int i=0; (i<=nump0); i++) {
+  for(int i=0; (i<=(nump0 + nump3)); i++) {
     if (i<=1) rojo=0;
     if ((i>=2)&&(i<=4)) rojo=128;
     if (i>=4) rojo=255;
@@ -259,7 +281,7 @@ void loop() {
     //delay(PAUSA);
   }
   strip1.clear();
-  for(int j=0; (j<=nump1); j++) {
+  for(int j=0; (j<=(nump1 + nump4)); j++) {
     if (j<=1) rojo=0;
     if ((j>=2)&&(j<=4)) rojo=128;
     if (j>=4) rojo=255;
@@ -272,7 +294,7 @@ void loop() {
     //delay(PAUSA);
   }
   strip2.clear();
-  for(int j=0; (j<=nump2); j++) {
+  for(int j=0; (j<=(nump2 + nump5)); j++) {
     if (j<=1) rojo=0;
     if ((j>=2)&&(j<=4)) rojo=128;
     if (j>=4) rojo=255;
@@ -284,4 +306,4 @@ void loop() {
     strip2.show();
     //delay(PAUSA);
   }
-}
+}//***fin loop
