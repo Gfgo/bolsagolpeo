@@ -163,7 +163,7 @@
 #endif
 #define NUMPIXELS   8
 #define led0        25  //GPIO25
-#define led1        26  //GPIO26
+#define led1        26  //GPIO26 10  //IO10
 #define led2        27  //GPIO27
 Adafruit_NeoPixel strip(NUMPIXELS, led0, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel strip1(NUMPIXELS, led1, NEO_GRB + NEO_KHZ800);
@@ -178,7 +178,7 @@ const int pin1 = 39;
 const int pin2 = 34;
 const int pin3 = A3;
 const int pin4 = A4;
-const int pin5 = 13;
+const int pin5 = 13;//GPIO13
 
 int golpe0 = 0;  
 int golpe1 = 0;
@@ -202,7 +202,7 @@ float       furk4=0;
 float       furk5=0;
 
 unsigned long previousMillis = 0;
-const long interval = 300;
+const long interval = 200;
 
 void setup() {
   #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
@@ -234,7 +234,11 @@ if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
     Serial.print(golpe0); Serial.print(nump0);Serial.print('\t'); Serial.print(golpe1); Serial.print(nump1); Serial.print('\t');
     Serial.print(golpe2); Serial.print(nump2);Serial.print('\t'); Serial.print(golpe3); Serial.print(nump3);Serial.print('\t'); 
-    Serial.print(golpe4); Serial.print(nump4);Serial.print('\t'); Serial.print(golpe5);Serial.print(nump5); Serial.print('\n');
+    Serial.print(golpe4); Serial.print(nump4);Serial.print('\t'); Serial.print(golpe5);Serial.print(nump5); Serial.println('\n');
+
+    Serial.print(furk0); Serial.print('\t'); Serial.print(furk1); Serial.print('\t'); Serial.print(furk2); 
+    Serial.print('\t'); Serial.print(furk3); Serial.print('\t'); Serial.print(furk4); Serial.print('\t'); 
+    Serial.print(furk5); Serial.println('\n');
 }//delay(10);
 
   if(golpe0>=600){
