@@ -202,51 +202,59 @@ float gz=0.221; //replace your value  0.021 -*0.007 -**0.221
 const byte cal=2;
 byte calpin=0;
 
-int  x=0;
-int  y=0;
-int  z=0;
+float  x=0;
+float  y=0;
+float  z=0;
 
-void calibracion(){
-  float x1=((x*5/1024.0 - X)/gx,2);
+  float x1=(((x*5/1024.0 - X)/gx),2);
   float y1=(((y*5/1024.0- Y)/gy),2);
   float z1=(((z*5/1024.0-Z)/gz),2);
   float x2=0.0; //float gx1=0;
   float y2=0.0; //float gy1=0;
-  float z2=0.0; //float gz1=0;
- //for (x1;x1<=0.0;x1+=0.02){
-  while(x1!=0.0){
-     if (x2>x1){
-        gx+=0.02;
-        x1=((x*5/1024.0 - X)/gx,2);
-        Serial.println(x1);}
-        else{
-          gx-=0.02;
-          x1=((x*5/1024.0 - X)/gx,2);
-           Serial.println(x1);}
-    }
-//  while(y1!=0.0){
-//     if (y2>y1){
-//        gy+=0.02;
+  float z2=1.0; //float gz1=0;
+
+void calibracion(){
+
+  Serial.println(z1);//Serial.print("---");
+  while (z1!=1.5){
+// for (byte i=0;i<=254;i++){
+  if(z1==1.5) {break;}
+//  x=analogRead(0);
+//     if (x2<x1){
+//        gx=gx+0.02;
+//        x1=((x*5/1024.0 - X)/gx,2);
+//        Serial.print("suma");Serial.println(x1);}
+//        else{
+//          gx=gx-0.02;
+//          x1=((x*5/1024.0 - X)/gx,2);
+//           Serial.print("resta");Serial.println(x1);}
+//    
+//     y=analogRead(1);
+//     if (y2<y1){
+//        gy=gy+0.02;
 //        y1=((y*5/1024.0 - Y)/gy,2);}
 //        else{
-//          gy-=0.02;
-//          y1=((y*5/1024.0 - Y)/gy,2);
-//          }
-//    }
-//  while(z1!=1.0){
-//     if (z2>z1){
-//        gz+=0.02;
-//        z1=((z*5/1024.0 - Z)/gz,2);}
-//        else{
-//          gz-=0.02;
-//          z1=((z*5/1024.0 - Z)/gz,2);
-//          }
-//    }
+//          gy=gy-0.02;
+//          y1=((y*5/1024.0 - Y)/gy,2);}
+//  
+     z=analogRead(2);
+      Serial.print("ggggg");
+     if (z2<z1){
+        gz=gz+0.2;
+        z1=((z*5/1024.0 - Z)/gz,2);
+        Serial.print("suma");Serial.print(z1);Serial.print(z2);Serial.println(gz);}
+        else{
+          gz=gz-0.2;
+          z1=((z*5/1024.0 - Z)/gz,2);
+          Serial.print("resta");Serial.print(z1);Serial.print(z2);Serial.println(gz);}
+
+          //z1 y z2 no estan siendo afectados
+    }
 }
  
 void setup()
 {
-  Serial.begin(9600);    //Baudrate 9600
+  Serial.begin(9600);
   pinMode(calpin, INPUT);
 
 }
