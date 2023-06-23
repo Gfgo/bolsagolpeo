@@ -189,7 +189,7 @@ void loop()
 }
 
 
-____________________________21/06
+//___________________________21/06
 float X=2.335;  //replace your value 1.355 -*1.6505 -**2.335 
 float gx=0.776; //replace your value 0.776 -*0.2145 -**0.776
 
@@ -197,7 +197,7 @@ float Y=1.84; //replace your value 1.889 -*1.7675 -**1.84
 float gy=0.173; //replace your value 0.033 -*0.0045 -**0.033
 
 float Z=1.48; //replace your value  1.738 -*1.736 -**1.57(1.48)
-float gz=0.221; //replace your value  0.021 -*0.007 -**0.221
+float gz=0.291; //replace your value  0.021 -*0.007 -**0.221-0291
 
 const byte cal=2;
 byte calpin=0;
@@ -205,20 +205,17 @@ byte calpin=0;
 float  x=0;
 float  y=0;
 float  z=0;
-
-  float x1=(((x*5/1024.0 - X)/gx),2);
-  float y1=(((y*5/1024.0- Y)/gy),2);
-  float z1=(((z*5/1024.0-Z)/gz),2);
-  float x2=0.0; //float gx1=0;
-  float y2=0.0; //float gy1=0;
-  float z2=1.0; //float gz1=0;
-
-void calibracion(){
-
-  Serial.println(z1);//Serial.print("---");
-  while (z1!=1.5){
+/*
+//float x1=0;
+//float y1=0;
+//float z1=0;
+//void calibracion(){
+//  z=analogRead(2);
+//  z1=((z*5/1024.0 - Z)/gz,2);
+//  Serial.println(z1);
+//  while (z1!=1.6){
 // for (byte i=0;i<=254;i++){
-  if(z1==1.5) {break;}
+//  if(z1==1.6) {break;}
 //  x=analogRead(0);
 //     if (x2<x1){
 //        gx=gx+0.02;
@@ -227,8 +224,7 @@ void calibracion(){
 //        else{
 //          gx=gx-0.02;
 //          x1=((x*5/1024.0 - X)/gx,2);
-//           Serial.print("resta");Serial.println(x1);}
-//    
+//           Serial.print("resta");Serial.println(x1);}    
 //     y=analogRead(1);
 //     if (y2<y1){
 //        gy=gy+0.02;
@@ -236,34 +232,29 @@ void calibracion(){
 //        else{
 //          gy=gy-0.02;
 //          y1=((y*5/1024.0 - Y)/gy,2);}
-//  
-     z=analogRead(2);
-      Serial.print("ggggg");
-     if (z2<z1){
-        gz=gz+0.2;
-        z1=((z*5/1024.0 - Z)/gz,2);
-        Serial.print("suma");Serial.print(z1);Serial.print(z2);Serial.println(gz);}
-        else{
-          gz=gz-0.2;
-          z1=((z*5/1024.0 - Z)/gz,2);
-          Serial.print("resta");Serial.print(z1);Serial.print(z2);Serial.println(gz);}
+//      Serial.print("ggggg");
+//     if (z1<1.6){
+//        gz=gz+0.2;
+//        z1=((z*5/1024.0 - Z)/gz,2);
+//        Serial.print("suma");Serial.print("\t");Serial.print(z);Serial.print("\t");Serial.print(z1);Serial.print("\t");Serial.println(gz);}
+//        else{
+//          gz=gz-0.2;
+//          z1=((z*5/1024.0 - Z)/gz,2);
+//          Serial.print("resta");Serial.print("\t");Serial.print(z);Serial.print("\t");Serial.print(z1);Serial.print("\t");Serial.println(gz);}
+//    //}
+//    }
+//}*/
 
-          //z1 y z2 no estan siendo afectados
-    }
-}
- 
-void setup()
-{
+void setup(){
   Serial.begin(9600);
   pinMode(calpin, INPUT);
 
 }
-void loop()
-{
+void loop(){
 calpin=digitalRead(2);
 if (calpin) {
-    Serial.println("calibración");
-    calibracion();}
+//    Serial.println("calibración");
+//    calibracion();}
   x=analogRead(0);
   y=analogRead(1);
   z=analogRead(2);
