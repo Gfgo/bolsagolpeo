@@ -156,21 +156,24 @@
 
 //**********ACELERACION
 //___________________________21/06
+//----------------------------------Valores calibracion
 float X=2.335;  //replace your value 1.355 -*1.6505 -**2.335 
 float gx=0.776; //replace your value 0.776 -*0.2145 -**0.776
-
 float Y=1.84; //replace your value 1.889 -*1.7675 -**1.84
 float gy=0.173; //replace your value 0.033 -*0.0045 -**0.033
-
 float Z=1.48; //replace your value  1.738 -*1.736 -**1.57(1.48)
 float gz=0.291; //replace your value  0.021 -*0.007 -**0.221-0291
-
-const byte cal=2;
-byte calpin=0;
-
+//----------------------------------Valores calibracion
 float  x=0;
 float  y=0;
 float  z=0;
+
+const byte cal=2;             //Boton calibración (26/06 no esta activo porque no a sido nescesario)
+byte calpin=0;                //Lectura de estado de boton
+int m=0;                    //Masa de bolsa de golpeo
+String m2="";
+float ftotal=0;               //Fuerza total
+
 /*
 //float x1=0;
 //float y1=0;
@@ -214,8 +217,19 @@ float  z=0;
 void setup(){
   Serial.begin(9600);
   pinMode(calpin, INPUT);
-
+  m2.reserve(200);
+  Serial.println("Digite el peso de la bolsa de golpeo en Kg:");
+  //delay(500);
+  while (m==0){
+    if (Serial.available() > 0) {
+      m2 = Serial.readString();
+      m=m2.toInt();
+      Serial.print("Se recibio ");
+      Serial.println(m);
+    }
+  }  
 }
+
 void loop(){
   float accx=0,accy=0,accz=0,acctot=0;
   float accx2=0,accy2=0,accz2=0,acctot2=0;;
@@ -241,14 +255,16 @@ calpin=digitalRead(2);
   /*Serial.println(((z*5/1024.0-Z)/gz),2);Serial.print('\t');*/Serial.print(accz);Serial.print('\t');
   //------------------toma de datos
 
-  //------------------------------------------fuerza en los 3 ejes
+  //------------------------------------------acceleracion en los 3 ejes
   accx2=pow(accx,2);    //raiz cuadrada acc x
   accy2=pow(accy,2);    //raiz cuadrada acc y
   accz2=pow(accz,2);    //raiz cuadrada acc z
   acctot=accx2+accy2+accz2;
   acctot2=sqrt(acctot); //raiz cuadrada
-  //-----------------------------------------fuerza en los 3 ejes
-  Serial.print("ftotal= ");Serial.println(acctot2);
+  //-----------------------------------------acceleracion en los 3 ejes
+  Serial.print("atotal= ");Serial.println(acctot2);
+  ftotal=m*acctot2;
+  Serial.print("Ftotal= ");Serial.println(ftotal);
   
-  delay(100);
+  delay(400);
 }
